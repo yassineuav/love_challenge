@@ -1,4 +1,3 @@
-import 'package:app/features/auth/login_view.dart';
 import 'package:app/features/auth/signup_view.dart';
 import 'package:app/theme/app_theme.dart';
 import 'package:flutter/material.dart';
