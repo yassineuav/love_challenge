@@ -1,5 +1,6 @@
 import 'package:app/common/rounded_small_button.dart';
 import 'package:app/constants/constants.dart';
+import 'package:app/features/auth/auth_controller.dart';
 import 'package:app/features/auth/auth_field.dart';
 import 'package:app/features/auth/login_view.dart';
 import 'package:flutter/gestures.dart';
@@ -8,9 +9,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../theme/pallet.dart';
 
-
 class SignUpView extends ConsumerStatefulWidget {
   static route() => MaterialPageRoute(builder: (context) => const SignUpView());
+
   const SignUpView({super.key});
 
   @override
@@ -18,7 +19,6 @@ class SignUpView extends ConsumerStatefulWidget {
 }
 
 class _SignUpViewState extends ConsumerState<SignUpView> {
-
   final appbar = UIConstants.appBar();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -30,8 +30,11 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
     passwordController.dispose();
   }
 
-  void onSignUp(){
-
+  void onSignUp() {
+    ref.read(authControllerProvider.notifier).signUp(
+        email: emailController.text,
+        password: passwordController.text,
+        context: context);
   }
 
   @override
@@ -61,7 +64,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                 Align(
                   alignment: Alignment.topRight,
                   child: RoundedSmallButton(
-                    onTap: () {},
+                    onTap: () {onSignUp();},
                     label: 'Sign up',
                     backgroundColor: Pallet.whiteColor,
                     textColor: Pallet.backgroundColor,
@@ -83,15 +86,15 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                             color: Pallet.blueColor,
                             fontSize: 16,
                           ),
-                          recognizer: TapGestureRecognizer()..onTap = (){
-                            Navigator.push(
-                              context,
-                              LoginView.route(),
-                            );
-                          },
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                LoginView.route(),
+                              );
+                            },
                         ),
-                      ]
-                  ),
+                      ]),
                 )
               ],
             ),
