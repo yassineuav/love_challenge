@@ -1,11 +1,15 @@
 import 'package:app/core/core.dart';
+import 'package:app/core/providers.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as model;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
 
-final authAPIProvider = Provider((ref){});
+final authAPIProvider = Provider((ref){
+  final account = ref.watch(appwriteAccountProvider);
+  return AuthAPI(account: account);
+});
 
 
 abstract class IAuthAPI {
