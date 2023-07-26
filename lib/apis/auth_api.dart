@@ -22,6 +22,8 @@ abstract class IAuthAPI {
     required String email,
     required String password,
   });
+
+  Future<model.Account?> currentUserAccount();
 }
 
 class AuthAPI implements IAuthAPI {
@@ -56,4 +58,16 @@ class AuthAPI implements IAuthAPI {
       return left(Failure(e.toString(), stackTrace));
     }
   }
+
+  @override
+  Future<model.Account?> currentUserAccount() async {
+    try {
+      return await _account.get();
+    } on AppwriteException catch (e) {
+      return null;
+    } catch (e) {
+      return null;
+    }
+  }
+
 }
