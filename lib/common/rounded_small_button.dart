@@ -1,5 +1,3 @@
-
-
 import 'package:app/theme/pallet.dart';
 import 'package:flutter/material.dart';
 
