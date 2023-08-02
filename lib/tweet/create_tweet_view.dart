@@ -15,7 +15,6 @@ class CreateTweetScreen extends ConsumerStatefulWidget {
 }
 
 class _CreateTweetScreenState extends ConsumerState<CreateTweetScreen> {
-
   final tweetTextController = TextEditingController();
 
   @override
@@ -60,8 +59,25 @@ class _CreateTweetScreenState extends ConsumerState<CreateTweetScreen> {
                           backgroundImage: NetworkImage(currentUser.profilePic),
                           radius: 30,
                         ),
-                        const SizedBox(width: 20,),
-                        TextField(controller: tweetTextController,),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Expanded(
+                          child: TextField(
+                            controller: tweetTextController,
+                            style: const TextStyle(fontSize: 22),
+                            decoration: const InputDecoration(
+                                hintText: "What's happening?",
+                                hintStyle: TextStyle(
+                                  color: Pallet.greyColor,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              border: InputBorder.none,
+                            ),
+                            maxLines: null,
+                          ),
+                        ),
                       ],
                     )
                   ],
